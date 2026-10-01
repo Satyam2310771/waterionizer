@@ -40,7 +40,7 @@ const LINKS = [
     { label: 'Low Ruminal pH Reduces Dietary Fiber Digestion', url: 'https://koreascience.kr/article/JAKO200710103443899.pdf' },
     { label: 'Drinking Behavior & Water Intake in Dairy Cows', url: 'https://hal.inrae.fr/hal-02662599' },
     { label: 'Electrolyzed Water: A Review — PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/33435548/' },
-    { label: 'Hydrogen-Rich Water & Gut Microbiota', url: 'https://doaj.org/article/0d494405d89c4bad90d1a6d9fc614f1e' },
+    { label: 'Hydrogen-Rich Water & Gut Microbiota', url: 'https://pubmed.ncbi.nlm.nih.gov/34213495/' },
     { label: 'Electrolyzed–Reduced Water: Review I', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9738607/' },
 ]
 
