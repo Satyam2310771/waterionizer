@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  @apply bg-sky-50 text-slate-900 transition-colors overflow-x-hidden;
+}
+.dark body {
+  @apply bg-[#050f1c] text-sky-50;
+}
+@layer components {
+  .glass {
+    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-sky-700/15 dark:border-cyan-400/20 rounded-lg shadow-lg;
+  }
+  .btn {
+    @apply inline-block border border-sky-700 dark:border-cyan-400 text-sky-700 dark:text-cyan-300 px-5 py-2 rounded font-semibold text-sm transition hover:-translate-y-0.5 cursor-pointer;
+  }
+  .red {
+    @apply bg-red-600 border-red-600 text-white dark:text-white hover:shadow-lg hover:shadow-red-600/40;
+  }
+  .inp {
+    @apply w-full p-2.5 mt-1 mb-3 border border-sky-700/20 rounded bg-transparent;
+  }
+  .wrap {
+    @apply max-w-6xl mx-auto px-5;
+  }
+  .sec {
+    @apply py-16;
+  }
+}
+@keyframes fl {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes up {
+  to {
+    transform: translateY(-760px);
+    opacity: 0;
+  }
+}
