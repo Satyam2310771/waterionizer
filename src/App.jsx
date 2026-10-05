@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { IM, C, P, T, BEN } from "./data";
 import OwnerPage from './OwnerPage';
 import softImg from './assets/softener.jpg'
+import logo from './assets/logo.png'
+import posterImg from './assets/distributor-poster.jpg'
 
 const SOFT = {
     en: {
@@ -53,7 +55,7 @@ function Softener({ L = 'en', onQuote, onWa }) {
                     <img src={softImg} alt="Manthan Jal Water Electrolysis Water Softener" loading="lazy" className="w-full max-h-[640px] object-cover" />
                 </div>
                 <div>
-                    <span className="inline-block border border-cyan-500 text-cyan-600 dark:text-cyan-300 text-xs font-semibold tracking-wider rounded-full px-3 py-1 mb-3">{s.badge}</span>
+                    <span className="badge mb-3">{s.badge}</span>
                     <h2 className="font-serif text-3xl md:text-4xl mb-3">{s.title}</h2>
                     <p className="opacity-80 mb-5">{s.desc}</p>
                     <div className="grid sm:grid-cols-2 gap-3">
@@ -74,12 +76,60 @@ function Softener({ L = 'en', onQuote, onWa }) {
                     </div>
                     <div className="flex flex-wrap gap-2 mt-5">
                         {s.chips.map((x) => (
-                            <span key={x} className="border border-sky-700/20 rounded-full px-3 py-1 text-sm">{x}</span>
+                            <span key={x} className="chip">{x}</span>
                         ))}
                     </div>
                     <div className="flex gap-2 flex-wrap mt-6">
                         <button className="btn red" onClick={onQuote}>{s.quote}</button>
                         <button className="btn" onClick={onWa}>WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
+function Distributor({ L = 'en' }) {
+    const hi = L === 'hi'
+    const msg = 'Hello, I want to become a Manthan Jal C&F / Distributor. Please share the details.'
+    return (
+        <section id="distributor" className="py-16">
+            <div className="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-10 items-center">
+                <a
+                    href={posterImg}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block rounded-2xl overflow-hidden shadow-2xl max-w-md mx-auto md:mx-0"
+                    aria-label="Open full poster"
+                >
+                    <img
+                        src={posterImg}
+                        alt="Manthan Jal C&F and Distributor invitation"
+                        loading="lazy"
+                        className="w-full h-auto"
+                    />
+                </a>
+                <div>
+                    <span className="badge mb-3">{hi ? 'डिस्ट्रीब्यूटरशिप' : 'DISTRIBUTORSHIP'}</span>
+                    <h2 className="font-serif text-3xl md:text-4xl mb-3">
+                        {hi ? 'राष्ट्रीय C&F / डिस्ट्रीब्यूटर बनें' : 'Become a National C&F / Distributor'}
+                    </h2>
+                    <p className="opacity-80 mb-5">
+                        {hi
+                            ? 'मंथन जल भारत के हर राज्य में C&F और हर जिले में डिस्ट्रीब्यूटर आमंत्रित कर रहा है। जुड़ने के लिए संपर्क करें।'
+                            : 'Manthan Jal is inviting C&F partners for every state and distributors for every district in India. Get in touch to join us.'}
+                    </p>
+                    <div className="flex gap-2 flex-wrap">
+                        <a className="btn red" href="tel:+917359617935">
+                            {hi ? 'कॉल करें' : 'Call'} +91 73596 17935
+                        </a>
+                        <a
+                            className="btn"
+                            target="_blank"
+                            rel="noreferrer"
+                            href={'https://wa.me/917359617935?text=' + encodeURIComponent(msg)}
+                        >
+                            WhatsApp
+                        </a>
                     </div>
                 </div>
             </div>
@@ -96,7 +146,13 @@ const wa = (x) =>
 const H2 = ({ children }) => (
     <h2 className="font-serif text-3xl md:text-4xl mb-4">{children}</h2>
 );
-const Box = ({ h, p, tag }) => <div className="glass p-5 border-l-4 border-l-cyan-500 hover:-translate-y-1 hover:border-l-red-600 transition">{tag && <span className="inline-block text-[11px] font-semibold tracking-wide uppercase border border-cyan-500 text-cyan-600 dark:text-cyan-300 rounded-full px-2.5 py-0.5 mb-2">{tag}</span>}<h3 className="font-serif text-lg mb-1">{h}</h3><p className="opacity-70 text-sm">{p}</p></div>
+const Box = ({ h, p, tag }) => (
+    <div className="glass p-5 border-l-4 border-l-cyan-500 hover:-translate-y-1 hover:border-l-red-600 transition">
+        {tag && <span className="badge mb-2">{tag}</span>}
+        <h3 className="font-serif text-lg mb-1">{h}</h3>
+        <p className="opacity-70 text-sm">{p}</p>
+    </div>
+);
     ;
 const Img = ({ s, alt, float, cls = "" }) => (
     <div
@@ -258,7 +314,7 @@ export default function App() {
                         <input className="inp" value={f.c} onChange={s("c")} />
                         <label>{t("prod")}</label>
                         <select
-                            className="inp dark:bg-slate-900"
+                            className="inp"
                             value={f.r}
                             onChange={s("r")}
                         >
@@ -383,12 +439,7 @@ const Services = () => {
                             "Taste & odour",
                             "Filtration",
                         ].map((x) => (
-                            <span
-                                key={x}
-                                className="inline-block border border-sky-700/20 rounded-full px-3 py-1 m-1 text-sm"
-                            >
-                                {x}
-                            </span>
+                            <span key={x} className="chip">{x}</span>
                         ))}
                     </div>
                 </div>
@@ -442,16 +493,15 @@ const Services = () => {
                             {t("explore")}
                         </button>
                         <button
-                            className="btn !text-white !border-white"
-                            onClick={() => setOrder(P[0].name)}
-                        >
+    className="btn !bg-white/15 !text-white hover:!bg-white/25 backdrop-blur"
+    onClick={() => setOrder(P[0].name)}>
                             {t("order")}
                         </button>
                     </div>
                 </div>
                 <button
                     aria-label="Previous"
-                    className="absolute left-3 top-1/2 w-10 h-10 rounded-full bg-white/15 border border-white/40 text-xl"
+                    className="bg-black/30 hover:bg-black/50 text-white text-xl"
                     onClick={() => setSi((si + 2) % 3)}
                 >
                     ‹
@@ -588,7 +638,7 @@ const Services = () => {
                     ].map((x) => (
                         <span
                             key={x}
-                            className="inline-block border border-sky-700/20 rounded-full px-3 py-1 m-1 text-sm"
+                            className="chip"
                         >
                             {x}
                         </span>
@@ -686,7 +736,7 @@ const Services = () => {
                 className="fixed inset-0 z-[99] bg-slate-950/60 grid place-items-center p-4 overflow-auto"
                 onClick={(e) => e.target == e.currentTarget && setOrder(null)}
             >
-                <div className="glass !bg-sky-50 dark:!bg-slate-900 w-full max-w-md p-6">
+                <div className="glass !bg-white dark:!bg-slate-900 w-full max-w-md p-6">
                     <h3 className="font-serif text-xl mb-2">{t("order")}</h3>
                     <label>{t("prod")}</label>
                     <input className="inp" readOnly value={order} />
@@ -723,79 +773,51 @@ const Services = () => {
     };
     return (
         <div>
-            <nav
-                className={`sticky top-0 z-50 transition ${sc ? "bg-white/70 dark:bg-slate-900/70 backdrop-blur-lg shadow" : ""}`}
-            >
-                <div className="wrap h-16 flex items-center gap-3">
-                    <a
-                        href="#/"
-                        className="mr-auto font-serif font-bold text-xl flex items-center gap-2"
-                    >
-                        <i className="w-6 h-6 -rotate-45 rounded-[50%_0_50%_50%] bg-gradient-to-br from-cyan-400 to-sky-700" />
-                        {C.name}
-                    </a>
-                    <div
-                        className={`fixed lg:static top-16 right-0 bottom-0 w-64 lg:w-auto flex flex-col lg:flex-row gap-5 p-6 lg:p-0 bg-sky-50 dark:bg-[#050f1c] lg:bg-transparent border-l lg:border-0 transition-transform ${menu ? "" : "translate-x-full lg:translate-x-0"}`}
-                    >
-                        {nav.map((n) => (
-                            <button
-                                key={n[0]}
-                                className="text-sm text-left hover:text-cyan-500"
-                                onClick={() => jump(n[1])}
-                            >
-                                {t(n[0])}
-                            </button>
-                        ))}
-                        <a
-                            className="text-sm hover:text-cyan-500"
-                            href="#/atm"
-                            onClick={() => setMenu(false)}
-                        >
-                            <a
-                                className="text-sm hover:text-cyan-500"
-                                href="#/about"
-                                onClick={() => setMenu(false)}
-                            >
-
-                            </a>
-                            {t("atm")}
-                        </a>
-                        <a className="text-sm hover:text-cyan-500" href="#/about" onClick={() => setMenu(false)}>About Owner</a>
-                    </div>
-                    <button
-                        className="btn !py-1"
-                        onClick={() => setL(L == "en" ? "hi" : "en")}
-                    >
-                        {L == "en" ? "हिंदी" : "EN"}
-                    </button>
-                    <button
-                        className="btn !py-1"
-                        aria-label="Theme"
-                        onClick={() => setDark(!dark)}
-                    >
-                        {dark ? "☀" : "☾"}
-                    </button>
-                    <button
-                        className="btn red !py-1 hidden md:block"
-                        onClick={() =>
-                            wa("Hello, I want to know more about Manthan Jal products.")
-                        }
-                    >
-                        {t("order")}
-                    </button>
-                    <button
-                        className="btn !py-1 lg:hidden"
-                        aria-label="Menu"
-                        onClick={() => setMenu(!menu)}
-                    >
-                        ☰
-                    </button>
-                </div>
-            </nav>
+            <nav className="sticky top-0 z-50">
+    <div className={`absolute inset-0 -z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg transition-shadow ${sc ? "shadow-md" : ""}`} />
+    <div className="wrap h-16 flex items-center gap-3">
+        <a href="#/" className="mr-auto flex items-center gap-2 font-serif font-bold text-xl">
+    <img src={logo} alt="Manthan Jal logo" className="h-11 w-11 rounded-full object-cover" />
+    <span className="hidden sm:inline">{C.name}</span>
+</a>
+        <div
+            className={`fixed lg:static top-16 right-0 bottom-0 w-64 lg:w-auto flex flex-col lg:flex-row gap-5 p-6 lg:p-0 bg-white dark:bg-slate-900 lg:bg-transparent dark:lg:bg-transparent shadow-xl lg:shadow-none transition-transform ${menu ? "" : "translate-x-full lg:translate-x-0"}`}
+        >
+            {nav.map((n) => (
+                <button key={n[0]} className="text-sm text-left hover:text-cyan-500" onClick={() => jump(n[1])}>
+                    {t(n[0])}
+                </button>
+            ))}
+            <a className="text-sm hover:text-cyan-500" href="#/atm" onClick={() => setMenu(false)}>
+                {t("atm")}
+            </a>
+            <a className="text-sm hover:text-cyan-500" href="#/about" onClick={() => setMenu(false)}>
+                About Owner
+            </a>
+        </div>
+        <button className="btn !py-1" onClick={() => setL(L == "en" ? "hi" : "en")}>
+            {L == "en" ? "हिंदी" : "EN"}
+        </button>
+        <button className="btn !py-1" aria-label="Theme" onClick={() => setDark(!dark)}>
+            {dark ? "☀" : "☾"}
+        </button>
+        <button
+            className="btn red !py-1 hidden md:inline-flex"
+            onClick={() => wa("Hello, I want to know more about Manthan Jal products.")}
+        >
+            {t("order")}
+        </button>
+        <button className="btn !py-1 lg:hidden" aria-label="Menu" onClick={() => setMenu(!menu)}>
+            ☰
+        </button>
+    </div>
+</nav>
             {prod ? <Detail p={prod} /> : isAtm ? <Atm /> : route == "#/about" ? <OwnerPage L={L} /> : <Home />}
+            <Distributor L={L} />
             <footer className="bg-[#06182b] text-sky-100/80 pt-14 pb-6">
                 <div className="wrap grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
                     <div>
+                        <img src={logo} alt="Manthan Jal logo" className="h-20 w-20 rounded-full mb-3" />
                         <h3 className="text-white font-serif text-lg">{C.name}</h3>
                         <p>Alkaline water ionizers manufactured in Surat, Gujarat.</p>
                     </div>
